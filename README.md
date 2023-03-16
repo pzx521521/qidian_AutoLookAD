@@ -13,6 +13,11 @@
 - [ ] 修改固定20s 为已观看15s
 - [ ] app自动获取无障碍权限
 
+
+![Screenshot_20230301_170005.jpg](https://cdnjson.com/images/2023/03/01/Screenshot_20230301_170005.jpg)
+![Screenshot_20230301_170005.jpg]()
+![Screenshot_20230301_170005.jpg]()
+
 [脚本源码: github][https://github.com/pzx521521/qidian_AutoLookAD] 
 
 [打包好的app: lanzou云盘](https://wwtw.lanzoum.com/iqL1A0oy574f)
