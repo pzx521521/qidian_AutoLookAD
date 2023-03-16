@@ -18,7 +18,7 @@
 ![Screenshot_20230301_170005.jpg]()
 ![Screenshot_20230301_170005.jpg]()
 
-[脚本源码: github][https://github.com/pzx521521/qidian_AutoLookAD] 
+[脚本源码: github](https://github.com/pzx521521/qidian_AutoLookAD)
 
 [打包好的app: lanzou云盘](https://wwtw.lanzoum.com/iqL1A0oy574f)
 
