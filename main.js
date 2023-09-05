@@ -23,6 +23,15 @@ function MyClick(str){
     }  
 }
 
+function ExprClick(str){
+    var meButton =textMatches(str).findOnce();
+    if (meButton != undefined){
+        meButton = meButton.parent();
+        toastLog("找到了" + str)
+        meButton.click()
+    }  
+}
+
 function Close(){
     // back() 失效 原因未知
     var meButton =className("android.widget.Image").text("cross").findOnce()
@@ -36,40 +45,7 @@ function Close(){
     }
 }
 
-home()
-
-if (launchApp("起点读书")){
-    toastLog("启动起点读书成功")
-}else{
-    toastLog("启动起点读书失败")
-}
-sleep(3000)
-
-//找到我 
-MyClick("我")
-sleep(2000)
-MyClick("福利中心")
-sleep(2000)
-
-//看视频1-8
-for (let index = 1; index < 11; index++) {
-    let caption = "第" + parseInt(index) +"个"   
-    var meButton = undefined
-    if(index>8){
-        meButton =text("看视频").findOnce();
-    }else{
-        meButton =textMatches("看第\\d+个视频").findOnce();
-        if (meButton == undefined){
-            continue
-        }
-        caption = meButton.text()        
-    }
-    toastLog("看视频" + caption)
-    if (meButton == undefined){
-        toastLog("没有找到:" + caption)
-        continue
-    }    
-    meButton.click()
+function CloseAd(caption){
     toastLog("看视频等待20s" + caption)
     sleep(20000)
     Close()  
@@ -83,3 +59,64 @@ for (let index = 1; index < 11; index++) {
     toastLog("看视频结束: " + caption) 
     sleep(2000)
 }
+
+function ClickAd8(){
+    var meButton = undefined
+    meButton =textMatches("看第\\d+个视频").findOnce();
+    if (meButton == undefined){
+        toastLog("没有找到:" + "看第\\d+个视频")
+    }else{
+        var caption = meButton.text()   
+        toastLog("找到了:" + caption)
+    }
+    meButton.click()
+}
+
+function ClickAd3(){
+    var meButton =textMatches("\\d+\/3次").findOnce();
+    if (meButton == undefined){
+        toastLog("找不到次数")
+    }else{
+        toastLog("找到了次数" + meButton.parent().childCount())
+        parentButton = meButton.parent().children()
+        .forEach(function(child){
+            if(child.className() == "android.widget.Button"){
+                child.click()
+            }
+        });
+    }
+}
+
+
+
+
+function LookAd(){
+    //看视频1-8
+    for (let index = 1; index <= 8; index++) { 
+        ClickAd8()       
+        CloseAd("前8次的第"+index+ "次")
+    }
+    for (let index = 1; index <= 3; index++) { 
+        ClickAd3()       
+        CloseAd("后3次的第"+index+ "次")
+    }
+}
+
+home()
+
+if (launchApp("起点读书")){
+    toastLog("启动起点读书成功")
+}else{
+    toastLog("启动起点读书失败")
+}
+sleep(3000)
+ 
+MyClick("我")
+sleep(1500)
+MyClick("福利中心")
+sleep(500)
+ExprClick("青少年")
+sleep(1500)
+LookAd()
+
+
