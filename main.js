@@ -46,10 +46,10 @@ function Close(){
 }
 
 function CloseAd(caption){
-    toastLog("看视频等待20s" + caption)
-    sleep(20000)
+    toastLog("看视频等待60s" + caption)
+    sleep(60000)
     Close()  
-    sleep(2000)
+    sleep(6000)
     toastLog("查找开心收下")
     var meButton =text("开心收下").findOnce()
     if (meButton != undefined){
@@ -57,7 +57,7 @@ function CloseAd(caption){
         meButton.click()
     }               
     toastLog("看视频结束: " + caption) 
-    sleep(2000)
+    sleep(6000)
 }
 
 function ClickAd8(){
