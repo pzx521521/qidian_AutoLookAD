@@ -18,9 +18,16 @@ function MyClick(str){
     var meButton = text(str).findOnce()
     if (meButton != undefined){
         meButton = meButton.parent();
+        if(!meButton.clickable()){
+            meButton = meButton.parent();
+        }
         toastLog("找到了" + str)
+        toastLog(meButton.clickable())
         meButton.click()
-    }  
+        return true
+    }else{
+        return false 
+    }     
 }
 
 function ExprClick(str){
@@ -101,22 +108,22 @@ function LookAd(){
         CloseAd("后3次的第"+index+ "次")
     }
 }
-
 home()
-
+sleep(1000)
 if (launchApp("起点读书")){
     toastLog("启动起点读书成功")
+    sleep(3000)
+    MyClick("我")
+    sleep(1500)
+    if (MyClick("我知道了")){
+        sleep(1500)
+    }
+    MyClick("福利中心")
+    sleep(1500)
+    LookAd()
 }else{
     toastLog("启动起点读书失败")
 }
-sleep(3000)
- 
-MyClick("我")
-sleep(1500)
-MyClick("福利中心")
-sleep(500)
-ExprClick("青少年")
-sleep(1500)
-LookAd()
+
 
 
