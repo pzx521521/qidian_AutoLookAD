@@ -58,7 +58,7 @@ function CloseAd(caption){
     Close()  
     sleep(2000)
     toastLog("查找开心收下")
-    var meButton =text("开心收下").findOnce()
+    var meButton =text("我知道了").findOnce()
     if (meButton != undefined){
         meButton = meButton.parent();
         meButton.click()
@@ -69,7 +69,7 @@ function CloseAd(caption){
 
 function ClickAd8(){
     var meButton = undefined
-    meButton =textMatches("看第\\d+个视频").findOnce();
+    meButton =textMatches("看视频领福利").findOnce();
     if (meButton == undefined){
         toastLog("没有找到:" + "看第\\d+个视频")
     }else{
@@ -80,7 +80,7 @@ function ClickAd8(){
 }
 
 function ClickAd3(){
-    var meButton =textMatches("\\d+\/3次").findOnce();
+    var meButton =textMatches(".*?\/3次").findOnce();
     if (meButton == undefined){
         toastLog("找不到次数")
     }else{
@@ -94,6 +94,19 @@ function ClickAd3(){
     }
 }
 
+function ClickAd3New(){
+    var meButtons =textMatches("看视频").find();
+    if (meButtons.length == 0){
+        toastLog("找不到看视频")
+    }else{
+        var meButton = meButtons[1]
+        toastLog("找到了"+meButtons.length +"个看视频")
+        parentButton = meButton.parent()
+        parentButton.click()
+
+    }
+}
+
 
 
 
@@ -104,7 +117,7 @@ function LookAd(){
         CloseAd("前8次的第"+index+ "次")
     }
     for (let index = 1; index <= 3; index++) { 
-        ClickAd3()       
+        ClickAd3New()       
         CloseAd("后3次的第"+index+ "次")
     }
 }
