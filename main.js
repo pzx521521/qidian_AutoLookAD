@@ -40,7 +40,7 @@ function ExprClick(str){
 
 function Close(){
     // back() 失效 原因未知
-    var meButton = text("关闭").click()
+    text("关闭").click()
 }
 
 function CloseAd(caption){
