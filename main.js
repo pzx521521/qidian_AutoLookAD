@@ -38,15 +38,10 @@ function ExprClick(str){
     }  
 }
 
-function Close(){
-    // back() 失效 原因未知
-    text("关闭").click()
-}
-
 function CloseAd(caption){
-    toastLog("看视频等待" + caption)
-    textContains("已观看").waitFor()
-    Close()  
+    toastLog("看视频等待20s" + caption)
+    sleep(20000)
+    text("关闭").click() 
     sleep(2000)
     MyClick("我知道了")               
     toastLog("看视频结束: " + caption) 
