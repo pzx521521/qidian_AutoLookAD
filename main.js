@@ -40,20 +40,12 @@ function ExprClick(str){
 
 function Close(){
     // back() 失效 原因未知
-    var meButton =className("android.widget.Image").text("cross").findOnce()
-    if (meButton == undefined){
-        meButton = className("android.widget.Image").text("此图片未加标签。打开右上角的“更多选项”菜单即可获取图片说明。").findOnce()
-    }    
-    if (meButton != undefined){
-        meButton = meButton.parent();
-        toastLog("找到了关闭按钮")
-        meButton.click()
-    }
+    text("关闭").click()
 }
 
 function CloseAd(caption){
-    toastLog("看视频等待20s" + caption)
-    sleep(20000)
+    toastLog("看视频等待" + caption)
+    textContains("已观看").waitFor()
     Close()  
     sleep(2000)
     MyClick("我知道了")               
@@ -137,6 +129,3 @@ if (launchApp("起点读书")){
 }else{
     toastLog("启动起点读书失败")
 }
-
-
-
