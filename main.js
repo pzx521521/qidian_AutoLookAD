@@ -41,7 +41,21 @@ function ExprClick(str){
 function CloseAd(caption){
     toastLog("看视频等待20s" + caption)
     sleep(20000)
-    text("关闭").click() 
+    
+function Close(){
+    if(text("关闭").exists()){
+        text("关闭").click() 
+    }else{
+        var meButton =className("android.widget.Image").text("cross").findOnce()
+        if (meButton == undefined){
+            meButton = className("android.widget.Image").text("此图片未加标签。打开右上角的“更多选项”菜单即可获取图片说明。").findOnce()
+        }    
+        if (meButton != undefined){
+            meButton = meButton.parent();
+            toastLog("找到了关闭按钮")
+            meButton.click()
+        }        
+    }        
     sleep(2000)
     MyClick("我知道了")               
     toastLog("看视频结束: " + caption) 
