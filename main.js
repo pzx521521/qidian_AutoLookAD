@@ -14,127 +14,70 @@ try {
 }
 
 
-function MyClick(str){
+function MyClick(str, selfClick) {
     var meButton = text(str).findOnce()
-    if (meButton != undefined){
-        meButton = meButton.parent();
-        if(!meButton.clickable()){
+    if (meButton != undefined) {
+        if (!selfClick) {
             meButton = meButton.parent();
+            if (!meButton.clickable()) {
+                meButton = meButton.parent();
+            }
         }
-        toastLog("找到了" + str)
+        toastLog("找到了:" + str)
         meButton.click()
         return true
-    }else{
-        return false 
-    }     
+    } else {
+        toastLog("找不到:" + str)
+        return false
+    }
 }
 
-function ExprClick(str){
-    var meButton =textMatches(str).findOnce();
-    if (meButton != undefined){
-        meButton = meButton.parent();
-        toastLog("找到了" + str)
-        meButton.click()
-    }  
-}
-
-function CloseAd(caption){
+function CloseAd(caption) {
     toastLog("看视频等待20s" + caption)
     sleep(20000)
-    if(text("跳过广告").exists()){
-        text("跳过广告").click() 
-    }else{
+    if (text("跳过广告").exists()) {
+        text("跳过广告").click()
+    } else {
         var meButtons = className("android.widget.ImageView").find()
-        if(meButtons.empty()){
+        if (meButtons.empty()) {
             toastLog("没找到关闭按钮╭(╯^╰)╮");
-        }else{
-            meButtons.some(function(bt){
-                if(bt.clickable()){
+        } else {
+            meButtons.some(function (bt) {
+                if (bt.clickable()) {
                     bt.click();
                     return true;
                 }
             });
-        }       
-    }        
-    sleep(1000)
-    MyClick("我知道了")               
-    toastLog("看视频结束: " + caption) 
+        }
+    }
+    toastLog("看视频结束: " + caption)
     sleep(1000)
 }
 
-function ClickAd8(){
-    var meButton = undefined
-    meButton =textMatches("看视频领福利").findOnce();
-    if (meButton == undefined){
-        toastLog("没有找到:" + "看第\\d+个视频")
-        return false
-    }else{
-        var caption = meButton.text()   
-        toastLog("找到了:" + caption)
-        meButton.click()
-        return true
-    }    
-}
 
-function ClickAd3(){
-    var meButton =textMatches(".*?\/3次").findOnce();
-    if (meButton == undefined){
-        toastLog("找不到次数")
-    }else{
-        toastLog("找到了次数" + meButton.parent().childCount())
-        parentButton = meButton.parent().children()
-        .forEach(function(child){
-            if(child.className() == "android.widget.Button"){
-                child.click()
-            }
-        });
+
+function LookAd() {
+    for (let index = 1; index <= 13; index++) {
+        if (MyClick("看视频", true)) {
+            CloseAd("第" + index + "次")
+        }
     }
 }
 
-function ClickAd3New(){
-    var meButtons =textMatches("看视频").find();
-    if (meButtons.length == 0){
-        toastLog("找不到看视频")
-    }else{
-        var meButton = meButtons[1]
-        toastLog("找到了"+meButtons.length +"个看视频")
-        parentButton = meButton.parent()
-        parentButton.click()
-
-    }
-}
-
-function LookAd(){
-    // //看视频1-8
-    for (let index = 1; index <= 8; index++) { 
-        if (ClickAd8()){
-            CloseAd("前8次的第"+index+ "次")
-        }   
-    }
-    for (let index = 1; index <= 5; index++) { 
-        if (MyClick("看视频")){
-            CloseAd("后3次的第"+index+ "次")
-        }          
-    }
-    if(MyClick("领奖励")){
-        sleep(1000)
-        MyClick("我知道了")  
-    }
-    
-}
 home()
 sleep(1000)
-if (launchApp("起点读书")){
+if (launchApp("起点读书")) {
     toastLog("启动起点读书成功")
     sleep(3000)
     MyClick("我")
     sleep(1500)
-    if (MyClick("我知道了")){
+    if (MyClick("我知道了")) {
         sleep(1500)
     }
     MyClick("福利中心")
-    sleep(1500)
+    sleep(2500)
     LookAd()
-}else{
+    toastLog("运行结束")
+} else {
     toastLog("启动起点读书失败")
 }
