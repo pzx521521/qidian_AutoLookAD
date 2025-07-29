@@ -1,4 +1,4 @@
-#该项目已废弃,请使用 api直接运行  https://github.com/pzx521521/qdapi
+# 该项目已废弃,请使用 api直接运行  https://github.com/pzx521521/qdapi
 
 # 基于[autoxjs](http://doc.autoxjs.com/)起点福利中心自动脚本
 
