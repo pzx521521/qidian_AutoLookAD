@@ -1,3 +1,5 @@
+#该项目已废弃,请使用 api直接运行  https://github.com/pzx521521/qdapi
+
 # 基于[autoxjs](http://doc.autoxjs.com/)起点福利中心自动脚本
 
 每天起点几毛钱的抵扣卡白嫖,自己看总觉得很亏,就几毛钱,食之无味,弃之可惜
